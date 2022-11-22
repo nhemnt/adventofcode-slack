@@ -50,14 +50,14 @@ const divider = {
 };
 const createBlocks = (members, url, org, boardCode) => {
   const blocks = [];
-  blocks.push({
-    type: 'section',
-    text: {
-      type: 'plain_text',
-      text: `${org ? org : ''} :christmas_tree: Advent of Code Leaderboard`,
-      emoji: true,
-    },
-  });
+  // blocks.push({
+  //   type: 'section',
+  //   text: {
+  //     type: 'plain_text',
+  //     text: `${org ? org : ''} :christmas_tree: Advent of Code Leaderboard`,
+  //     emoji: true,
+  //   },
+  // });
   blocks.push({
     type: 'context',
     elements: [
