@@ -68,7 +68,7 @@ const createBlocks = (members, url, org, boardCode) => {
       },
       {
         type: 'mrkdwn',
-        text: `<${url}|*Join the Paytm board*> ${boardCode}*`,
+        text: `<${url}|*Join the ${org} board*> *${boardCode}*`,
       },
     ],
   });
