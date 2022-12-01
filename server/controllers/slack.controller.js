@@ -14,7 +14,7 @@ const getStars = (count) => {
   if (!count) return '';
 
   return [...new Array(count)].reduce((acc, curr) => {
-    return `${acc}:start: `;
+    return `${acc}:star: `;
   }, '');
 };
 
@@ -75,14 +75,14 @@ const createBlocks = (members, url, org, boardCode) => {
 
   blocks.push(divider);
 
-  members.forEach(({ name, stars, last_star_ts }, index) => {
+  members.forEach(({ name, stars, last_star_ts, local_score }, index) => {
     const lastStarDate = formatDate(last_star_ts);
     const starStr = getStars(stars);
     blocks.push({
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: `*${name}*\n *0*  :points: ${starStr ? '\n ' + starStr : ''}${
+        text: `*${name}*\n *${local_score}*  :points: ${starStr ? '\n ' + starStr : ''}${
           lastStarDate ? '\n *Last start won* -' + lastStarDate : ''
         }`,
       },
