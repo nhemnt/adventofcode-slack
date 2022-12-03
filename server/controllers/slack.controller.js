@@ -3,7 +3,6 @@ import cookie from 'cookie';
 import lodash from 'lodash';
 import { MissingFieldError, InternalError } from '../errors';
 
-
 const ICONS = {
   FIRST_POSITION: 'https://cdn-icons-png.flaticon.com/512/3975/3975625.png',
   SECOND_POSITION: 'https://cdn-icons-png.flaticon.com/512/3975/3975628.png',
@@ -82,11 +81,11 @@ const createBlocks = (members, url, org, boardCode) => {
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: `*${name}*\n *${local_score}*  :points: ${starStr ? '\n ' + starStr : ''}${
-          lastStarDate ? '\n *Last start won* -' + lastStarDate : ''
-        }`,
+        text: `*${name}*\n *${local_score}*  :points: ${
+          starStr ? '\n ' + starStr : ''
+        }${lastStarDate ? '\n *Last start won* -' + lastStarDate : ''}`,
       },
-      ...(getMedal(index)),
+      ...getMedal(index),
     });
 
     blocks.push(divider);
@@ -137,10 +136,11 @@ export const adventOfCode = async (req, res) => {
       headers: { cookie: cookie.serialize('session', SESSION_ID) },
     });
 
-    const members = lodash.sortBy(response.data.members, [
-      '-local_score',
-      '-stars',
-    ]);
+    const members = lodash.orderBy(
+      response.data.members,
+      ['local_score', 'stars'],
+      ['desc']
+    );
 
     // https://app.slack.com/block-kit-builder/T026NT2D4
     const blocks = createBlocks(members, url, ORGANISATION, BOARD_CODE);
@@ -152,7 +152,7 @@ export const adventOfCode = async (req, res) => {
       // text: message,
       blocks,
     });
-    return res.status(200).send({ response: "ok" });
+    return res.status(200).send({ response: 'ok' });
   } catch (_err) {
     // err contains sensitive info
     throw new InternalError();
