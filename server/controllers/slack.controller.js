@@ -17,8 +17,8 @@ const getStars = (count) => {
   }, '');
 };
 
-const getMedal = (index) => {
-  if (index > 2) return {};
+const getMedal = (index, stars) => {
+  if (index > 2 || stars < 1) return {};
   let url = '';
   switch (index) {
     case 0:
@@ -85,7 +85,7 @@ const createBlocks = (members, url, org, boardCode) => {
           starStr ? '\n ' + starStr : ''
         }${lastStarDate ? '\n *Last start won* -' + lastStarDate : ''}`,
       },
-      ...getMedal(index),
+      ...getMedal(index, stars),
     });
 
     blocks.push(divider);
