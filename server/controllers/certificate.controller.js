@@ -1,7 +1,7 @@
 import { InternalError } from "../errors";
 
 import { createCanvas, loadImage } from "canvas";
-import fs from "fs";
+// import fs from "fs";
 import { ICONS } from "./slack.controller";
 import { uploadImage } from "../services/cloudinary";
 
