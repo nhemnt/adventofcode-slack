@@ -209,13 +209,13 @@ export const adventOfCode = async (req, res) => {
 
     // https://app.slack.com/block-kit-builder/T026NT2D4
     const blocks = createBlocks(members, url, ORGANISATION, BOARD_CODE);
-    // await axios.post(WEBHOOK_URI, {
-    //   username: `Advent of Code Leaderboard ${
-    //     ORGANISATION ? '| ' + ORGANISATION : ''
-    //   } `,
-    //   icon_emoji: ':christmas_tree:',
-    //   blocks,
-    // });
+    await axios.post(WEBHOOK_URI, {
+      username: `Advent of Code Leaderboard ${
+        ORGANISATION ? '| ' + ORGANISATION : ''
+      } `,
+      icon_emoji: ':christmas_tree:',
+      blocks,
+    });
 
     generateCertificate(members);
     return res.status(200).send({ response: "ok" });
